@@ -23,7 +23,7 @@ Route::get('/testroute', function() {
     Mail::to('test@test.test')->send(new PasswordMail($password));
 });
 
-Route::prefix('admin')->middleware(['auth', 'AdminMiddleware'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'AdminMiddleware', 'verified'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     Route::group(['prefix' => 'posts'], function () {
@@ -70,5 +70,5 @@ Route::prefix('admin')->middleware(['auth', 'AdminMiddleware'])->group(function 
     });
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
