@@ -14,6 +14,8 @@ class Post extends Model
     protected $table = 'posts';
     protected $guarded = false;
 
+    protected $withCount = ['likedUsers'];
+    protected $with = ['category'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

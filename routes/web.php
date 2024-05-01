@@ -24,6 +24,9 @@ Route::namespace('Main')->group(function () {
     Route::prefix('{post}/comments')->group(function (){
         Route::post('/',[MainController::class, 'comment'])->name('post.comment');
     });
+    Route::prefix('{post}/likes')->group(function (){
+        Route::post('/',[MainController::class, 'like'])->name('post.like');
+    });
 });
 
 Route::namespace('Personal')->prefix('personal')->middleware(['auth', 'verified'])->group(function () {

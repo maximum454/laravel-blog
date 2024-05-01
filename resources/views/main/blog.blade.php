@@ -12,7 +12,21 @@
                                 <div class="blog-post-thumbnail-wrapper">
                                     <img src="{{'storage/'.$item->preview_image}}" alt="{{$item->title}}">
                                 </div>
-                                <p class="blog-post-category">{{$item->category->title}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="blog-post-category">{{$item->category->title}}</p>
+                                    <form action="{{route('post.like', $item->id)}}" method="POST">
+                                        @csrf
+                                        @if($item->liked_users_count)
+                                            <span>{{$item->liked_users_count}}</span>
+                                        @endif
+                                        <button type="submit" class="btn p-0">
+                                            @auth()
+                                                <i class="{{auth()->user()->likedPosts->contains($item->id) ? 'fas' : 'far'}} fa-heart"></i>
+                                            @endauth
+                                        </button>
+                                    </form>
+                                </div>
+
                                 <a href="{{route('main.blog.post', $item->id)}}" class="blog-post-permalink">
                                     <h6 class="blog-post-title">{{$item->title}}</h6>
                                 </a>
@@ -36,7 +50,20 @@
                                     <div class="blog-post-thumbnail-wrapper">
                                         <img src="{{'storage/'.$item->preview_image}}" alt="{{$item->title}}">
                                     </div>
-                                    <p class="blog-post-category">Blog post</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="blog-post-category">{{$item->category->title}}</p>
+                                        <form action="{{route('post.like', $item->id)}}" method="POST">
+                                            @csrf
+                                            <span>
+                                                {{$item->liked_users_count}}
+                                            </span>
+                                            <button type="submit" class="btn p-0">
+                                                @auth()
+                                                    <i class="{{auth()->user()->likedPosts->contains($item->id) ? 'fas' : 'far'}} fa-heart"></i>
+                                                @endauth
+                                            </button>
+                                        </form>
+                                    </div>
                                     <a href="{{route('main.blog.post', $item->id)}}" class="blog-post-permalink">
                                         <h6 class="blog-post-title">{{$item->title}}</h6>
                                     </a>

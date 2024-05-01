@@ -55,4 +55,9 @@ class MainController extends Controller
 
         return redirect()->route('main.blog.post', $post->id);
     }
+    public function like(Post $post)
+    {
+        auth()->user()->likedPosts()->toggle($post->id);
+        return redirect()->back();
+    }
 }

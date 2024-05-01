@@ -5,9 +5,24 @@
         <div class="container">
             @if($post->id > 0)
                 <h1 class="edica-page-title" data-aos="fade-up">{{$post->title}}</h1>
-                <p class="edica-blog-post-meta" data-aos="fade-up"
-                   data-aos-delay="200">{{$date->translatedFormat('F')}} {{$date->day}}, {{$date->year}}
-                    • {{$date->format('H:i')}} • {{$post->comments->count()}} Комментария</p>
+                <div class="edica-blog-post-meta d-flex flex-wrap justify-content-center align-items-center">
+                    <p class="m-0 mr-1" data-aos="fade-up" data-aos-delay="200">{{$date->translatedFormat('F')}} {{$date->day}}, {{$date->year}}• {{$date->format('H:i')}} • {{$post->comments->count()}} Комментария</p>
+                    <form data-aos="fade-up" action="{{route('post.like', $post->id)}}" method="POST">
+                        @csrf
+                        @if($post->liked_users_count)
+                        <span>
+                            {{$post->liked_users_count}}
+                        </span>
+                        @endif
+                        <button type="submit" class="btn p-0">
+                            @auth()
+                                <i class="{{auth()->user()->likedPosts->contains($post->id) ? 'fas' : 'far'}} fa-heart"></i>
+                            @endauth
+                        </button>
+                    </form>
+                </div>
+
+
                 <section class="blog-post-featured-img" data-aos="fade-up" data-aos-delay="300">
                     <img src="{{asset('storage/'.$post->main_image)}}" alt="featured image" class="w-100">
                 </section>
