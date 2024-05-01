@@ -14,8 +14,11 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 
 
-Route::name('main')->group(function () {
-    Route::get('/', [MainController::class, 'index']);
+Route::namespace('Main')->group(function () {
+    Route::get('/', [MainController::class, 'index'])->name('main.index');
+    Route::get('/about', [MainController::class, 'about'])->name('main.about');
+    Route::get('/blog', [MainController::class, 'blog'])->name('main.blog');
+    Route::get('/contact', [MainController::class, 'contact'])->name('main.contact');
 });
 
 Route::namespace('Personal')->prefix('personal')->middleware(['auth', 'verified'])->group(function () {
