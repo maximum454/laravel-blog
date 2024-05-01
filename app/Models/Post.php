@@ -31,9 +31,16 @@ class Post extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function likedUsers()
     {
-        return $this->belongsToMany(User::class,'post_user_likes', 'post_id','user_id');
+        return $this->belongsToMany(User::class, 'post_user_likes', 'post_id', 'user_id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
 }

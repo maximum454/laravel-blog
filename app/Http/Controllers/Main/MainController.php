@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -27,6 +28,14 @@ class MainController extends Controller
     {
         return view('main.contact');
     }
-
-
+    public function post($post)
+    {
+        $post = Post::find($post);
+        $date = Carbon::parse($post->created_at);
+        $relatedPosts = Post::where('category_id', $post->category_id)
+            ->where('id', '!=', $post->id)
+            ->get()
+            ->take(3);
+        return view('main.post', compact('post','date', 'relatedPosts'));
+    }
 }

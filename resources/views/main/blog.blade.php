@@ -13,7 +13,7 @@
                                     <img src="{{'storage/'.$item->preview_image}}" alt="{{$item->title}}">
                                 </div>
                                 <p class="blog-post-category">{{$item->category->title}}</p>
-                                <a href="#" class="blog-post-permalink">
+                                <a href="{{route('main.blog.post', $item->id)}}" class="blog-post-permalink">
                                     <h6 class="blog-post-title">{{$item->title}}</h6>
                                 </a>
                             </div>
@@ -34,12 +34,11 @@
                             @foreach($postsRandom as $item)
                                 <div class="col-md-6 blog-post" data-aos="fade-up">
                                     <div class="blog-post-thumbnail-wrapper">
-                                        <img src="assets/images/blog_4.jpg" alt="blog post">
+                                        <img src="{{'storage/'.$item->preview_image}}" alt="{{$item->title}}">
                                     </div>
                                     <p class="blog-post-category">Blog post</p>
-                                    <a href="#!" class="blog-post-permalink">
-                                        <h6 class="blog-post-title">Front becomes an official Instagram Marketing
-                                            Partner</h6>
+                                    <a href="{{route('main.blog.post', $item->id)}}" class="blog-post-permalink">
+                                        <h6 class="blog-post-title">{{$item->title}}</h6>
                                     </a>
                                 </div>
                             @endforeach
@@ -52,7 +51,7 @@
                         <ul class="post-list">
                             @foreach($postsRandom as $item)
                                 <li class="post">
-                                    <a href="#!" class="post-permalink media">
+                                    <a href="{{route('main.blog.post', $item->id)}}" class="post-permalink media">
                                         <img src="{{'storage/'.$item->preview_image}}" alt="{{$item->title}}">
                                         <div class="media-body">
                                             <h6 class="post-title">{{$item->title}}</h6>
