@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    protected $table = 'commetns';
+    protected $table = 'comments';
     protected $guarded = false;
 }

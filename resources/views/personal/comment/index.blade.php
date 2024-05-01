@@ -23,66 +23,58 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>5</h3>
+                <div class="col-12">
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            <h3 class="card-title">Responsive Hover Table</h3>
 
-                            <p>Посты</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-bag"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>10</h3>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control float-right"
+                                           placeholder="Search">
 
-                            <p>Комментарии</p>
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Комментарии</th>
+                                    <th colspan="2">Действия</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($comments as $item)
+                                    <tr class="align-content-center">
+                                        <td>{{$item->id}}</td>
+                                        <td>{{$item->message}}</td>
+                                        <td>
+                                            <a href="{{route('comment.edit', $item->id)}}" class="btn btn-link"><i class="fas fa-pen"></i></a>
+                                        </td>
+                                        <td>
+                                            <form action="{{route('comment.delete', $item->id)}}" method="post" class="inline">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-link"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                        <a href="#" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
+                        <!-- /.card-body -->
                     </div>
+                    <!-- /.card -->
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6" >
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>16</h3>
-
-                            <p>Чаты</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>3</h3>
-
-                            <p>Теги</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">Перейти <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
             </div>
             <!-- /.row -->
 
