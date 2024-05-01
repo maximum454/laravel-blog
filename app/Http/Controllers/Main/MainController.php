@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Main\Comment\StoreRequest;
+use App\Models\Comment;
 use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,21 +15,25 @@ class MainController extends Controller
     {
         return view('main.index');
     }
+
     public function about()
     {
         return view('main.about');
     }
+
     public function blog()
     {
         $posts = Post::paginate(6);
         $postsRandom = Post::get()->random(4);
         $likedPosts = Post::withCount('likedUsers')->orderBy('liked_users_count', 'DESC')->get()->take(4);
-        return view('main.blog', compact('posts','postsRandom', 'likedPosts'));
+        return view('main.blog', compact('posts', 'postsRandom', 'likedPosts'));
     }
+
     public function contact()
     {
         return view('main.contact');
     }
+
     public function post($post)
     {
         $post = Post::find($post);
@@ -36,6 +42,17 @@ class MainController extends Controller
             ->where('id', '!=', $post->id)
             ->get()
             ->take(3);
-        return view('main.post', compact('post','date', 'relatedPosts'));
+
+        return view('main.post', compact('post', 'date', 'relatedPosts'));
+    }
+
+    public function comment(Post $post, StoreRequest $request)
+    {
+        $data = $request->validated();
+        $data['user_id'] = auth()->user()->id;
+        $data['post_id'] = $post->id;
+        Comment::create($data);
+
+        return redirect()->route('main.blog.post', $post->id);
     }
 }

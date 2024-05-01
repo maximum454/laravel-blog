@@ -20,6 +20,10 @@ Route::namespace('Main')->group(function () {
     Route::get('/blog', [MainController::class, 'blog'])->name('main.blog');
     Route::get('/post/{id}', [MainController::class, 'post'])->name('main.blog.post');
     Route::get('/contact', [MainController::class, 'contact'])->name('main.contact');
+
+    Route::prefix('{post}/comments')->group(function (){
+        Route::post('/',[MainController::class, 'comment'])->name('post.comment');
+    });
 });
 
 Route::namespace('Personal')->prefix('personal')->middleware(['auth', 'verified'])->group(function () {
