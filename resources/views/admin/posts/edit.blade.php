@@ -103,7 +103,7 @@
                             @enderror
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary">Добавить</button>
+                            <button type="submit" class="btn btn-primary">Обновить</button>
                         </div>
                     </form>
                 </div>

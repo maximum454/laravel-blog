@@ -23,10 +23,10 @@
                 </ul>
                 <ul class="navbar-nav mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Войти</a>
+                        <a class="nav-link" href="{{ route('login') }}">Войти</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Регистрация</a>
+                        <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
                     </li>
                 </ul>
             </div>

@@ -21,22 +21,6 @@
                 <div class="col-12">
                     <a href="{{route('post.edit', $post->id) }}" class="btn btn-primary">Редактировать</a>
                     <div class="card mt-2">
-                        <div class="card-header">
-                            <h3 class="card-title">Responsive Hover Table</h3>
-
-                            <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
 
@@ -46,7 +30,7 @@
                                         <td>{{$post->id}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Название</th>
+                                        <th>Заголовок</th>
                                         <td>{{$post->title}}</td>
                                     </tr>
                                     <tr>
@@ -55,19 +39,23 @@
                                     </tr>
                                     <tr>
                                         <th>Превью</th>
-                                        <td><img src="{{asset('storage/'.$post->main_image)}}" width="120" height="120" alt=""></td>
+                                        <td><img src="{{asset('storage/'.$post->preview_image)}}" width="120" height="120" alt=""></td>
                                     </tr>
                                     <tr>
                                         <th>Главная</th>
-                                        <td><img src="{{asset('storage/'.$post->main_image)}}" width="120" height="120" alt=""></td>
+                                        <td><img src="{{asset('storage/'.$post->main_image)}}" width="120"  alt=""></td>
                                     </tr>
                                     <tr>
-                                        <th>категорию</th>
-                                        <td>{{$post->categoty_id}}</td>
+                                        <th>Категория</th>
+                                        <td>{{$post->category->title}}</td>
                                     </tr>
                                     <tr>
                                         <th>Теги</th>
-                                        <td>$post->categoty_id</td>
+                                        <td>
+                                            @foreach($post->tags as $tag)
+                                            {{$tag->title}}
+                                            @endforeach
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
