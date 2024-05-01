@@ -1,31 +1,36 @@
 <?php
 
+use App\Http\Controllers\Personal\CommentController;
+use App\Http\Controllers\Personal\LikedController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Main\MainController;
+use App\Http\Controllers\Personal\PersonalController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
-use App\Mail\User\PasswordMail;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers;
-use App\Http\Controllers\Main\MainController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CategoryController;
 
 
 Route::name('main')->group(function () {
     Route::get('/', [MainController::class, 'index']);
 });
 
-Route::get('/testroute', function() {
-    $password = "ddfdgergfdgfdg";
-    Mail::to('test@test.test')->send(new PasswordMail($password));
+Route::namespace('Personal')->prefix('personal')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [PersonalController::class, 'index'])->name('personal.dashboard');
+    Route::group(['prefix' => 'liked'], function () {
+        Route::get('/', [LikedController::class, 'index'])->name('like.index');
+        Route::delete('/{post}', [LikedController::class, 'delete'])->name('like.delete');
+    });
+    Route::group(['prefix' => 'comments'], function () {
+        Route::get('/', [CommentController::class, 'index'])->name('comment.index');
+    });
 });
 
-Route::prefix('admin')->middleware(['auth', 'AdminMiddleware', 'verified'])->group(function () {
+Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'AdminMiddleware', 'verified'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index'])->name('post.index');
         Route::get('/create', [PostController::class, 'create'])->name('post.create');
@@ -35,7 +40,6 @@ Route::prefix('admin')->middleware(['auth', 'AdminMiddleware', 'verified'])->gro
         Route::patch('/{post}', [PostController::class, 'update'])->name('post.update');
         Route::delete('/{post}', [PostController::class, 'delete'])->name('post.delete');
     });
-
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', [CategoryController::class, 'index'])->name('category.index');
         Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
@@ -54,7 +58,6 @@ Route::prefix('admin')->middleware(['auth', 'AdminMiddleware', 'verified'])->gro
         Route::patch('/{tag}', [TagController::class, 'update'])->name('tag.update');
         Route::delete('/{tag}', [TagController::class, 'delete'])->name('tag.delete');
     });
-
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', [UserController::class, 'index'])->name('user.index');
         Route::get('/create', [UserController::class, 'create'])->name('user.create');
@@ -69,6 +72,7 @@ Route::prefix('admin')->middleware(['auth', 'AdminMiddleware', 'verified'])->gro
         Route::post('/', [ContactController::class, 'submit'])->name('contact.submit');
     });
 });
+
 
 Auth::routes(['verify' => true]);
 
