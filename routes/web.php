@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Personal\CommentController;
 use App\Http\Controllers\Personal\LikedController;
+use App\Http\Controllers\Personal\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Main\MainController;
@@ -31,6 +32,11 @@ Route::namespace('Main')->group(function () {
 
 Route::namespace('Personal')->prefix('personal')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [PersonalController::class, 'index'])->name('personal.dashboard');
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
+        Route::get('/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/{profile}', [ProfileController::class, 'update'])->name('profile.update');
+    });
     Route::group(['prefix' => 'liked'], function () {
         Route::get('/', [LikedController::class, 'index'])->name('like.index');
         Route::delete('/{post}', [LikedController::class, 'delete'])->name('like.delete');

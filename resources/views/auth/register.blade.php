@@ -61,6 +61,23 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Кто вы') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="role" id="role" class="form-select"  required>
+                                    <option selected disabled>Выбирете</option>
+                                    <option value="1">Преподаватель</option>
+                                    <option value="2">Ученик</option>
+                                </select>
+                                @error('role')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>Поле обязательное</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
