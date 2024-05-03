@@ -70,4 +70,7 @@ php artisan serve
 
 php artisan queue:work
 
+Запустите сервер WebSocket:
+
 php artisan reverb:start
+

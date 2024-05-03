@@ -21,74 +21,65 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
-                <!-- Small boxes (Stat box) -->
-                <div class="row">
-                    <div class="col-12">
-                        <a href="{{route('user.create')}}" class="btn btn-primary">Добавить</a>
-                        <div class="card mt-2">
-                            <div class="card-header">
-                                <h3 class="card-title">Responsive Hover Table</h3>
+                <div class="card card-solid">
+                    <div class="card-body pb-0">
+                        <div class="row">
+                            @foreach($user as $item)
+                                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column" data-id="{{$item->id}}">
+                                    <div class="card bg-light d-flex flex-fill">
+                                        <div class="card-header text-muted border-bottom-0">
+                                            Digital Strategist
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <h2 class="lead"><b>{{$item->name}}</b> {{$item->role}}</h2>
+                                                    <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
+                                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-mail-bulk"></i></span> Email #: {{$item->email}}</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-5 text-center">
+                                                    <img src="{{asset('/admin/dist/img/user1-128x128.jpg')}}" alt="user-avatar" class="img-circle img-fluid">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="text-right">
+                                                <a href="#" class="btn btn-sm bg-teal">
+                                                    <i class="fas fa-comments"></i>
+                                                </a>
+                                                <a href="{{route('user.show', $item->id)}}" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-user"></i> View Profile
+                                                </a>
 
-                                <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                               placeholder="Search">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                                                <a href="{{route('user.edit', $item->id)}}"  class="btn btn-sm  btn-warning">
+                                                    <i class="fas fa-pen"></i> Edit Profile
+                                                </a>
+                                                <form class="d-inline" action="{{route('user.delete', $item->id)}}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Имя</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
-                                        <th>Действия</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($user as $item)
-                                        <tr>
-                                            <td>{{$item->id}}</td>
-                                            <td>{{$item->name}}</td>
-                                            <td>{{$item->email}}</td>
-                                            <td>{{$item->role}}</td>
-                                            <td>
-                                                <a href="{{route('user.show', $item->id)}}"><i
-                                                        class="fas fa-eye"></i></a>
-                                                <a href="{{route('user.edit', $item->id)}}"><i
-                                                        class="fas fa-pen"></i></a>
-                                                <form action="{{route('user.delete', $item->id)}}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-link">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
+                            @endforeach
 
-                                                </form>
 
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
                     </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <nav aria-label="Contacts Page Navigation">
+                            {{$user->links()}}
+                        </nav>
+                    </div>
+                    <!-- /.card-footer -->
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>
