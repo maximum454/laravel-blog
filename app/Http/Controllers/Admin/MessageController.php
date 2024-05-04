@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Personal;
+namespace App\Http\Controllers\Admin;
 
 use App\Events\StoreMessageEvent;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Personal\MessageStoreRequest;
-use App\Http\Resources\Personal\MessageResource;
+use App\Http\Requests\Admin\MessageStoreRequest;
+use App\Http\Resources\MessageResource;
 use App\Models\Message;
-use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
@@ -16,7 +15,7 @@ class MessageController extends Controller
         $user = auth()->user();
         $messages = Message::all();
         $messages = MessageResource::collection($messages);
-        return view('personal.message.index', compact('user', 'messages'));
+        return view('admin.message.index', compact('user', 'messages'));
     }
 
     public function store(MessageStoreRequest $request)

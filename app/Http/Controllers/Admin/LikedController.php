@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Personal;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -11,7 +11,7 @@ class LikedController extends Controller
     {
         $currentUser = auth()->user();
         $posts = $currentUser->likedPosts;
-        return view('personal.liked.index', compact('posts'));
+        return view('admin.liked.index', compact('posts'));
     }
 
     public function delete(Post $post)

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Personal;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Personal\Comment\UpdateRequest;
+use App\Http\Requests\Admin\UpdateRequest;
 use App\Models\Comment;
 
 class CommentController extends Controller
@@ -12,11 +12,11 @@ class CommentController extends Controller
     {
         $currentUser = auth()->user();
         $comments = $currentUser->comments;
-        return view('personal.comment.index', compact('comments'));
+        return view('admin.comment.index', compact('comments'));
     }
     public function edit(Comment $comment)
     {
-        return view('personal.comment.edit', compact('comment'));
+        return view('admin.comment.edit', compact('comment'));
     }
     public function update(UpdateRequest $request, Comment $comment)
     {

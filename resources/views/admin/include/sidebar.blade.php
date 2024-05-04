@@ -55,10 +55,34 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('contact.index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-tags"></i>
+                <a href="{{route('admin.messages')}}" class="nav-link">
+                    <i class="nav-icon fas fa-comments"></i>
                     <p>
-                        Форма
+                        Чаты
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('like.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-heart"></i>
+                    <p>
+                        Понравившиеся посты
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('comment.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-comment"></i>
+                    <p>
+                        Комментарии
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('contact.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Обратная связь
                     </p>
                 </a>
             </li>

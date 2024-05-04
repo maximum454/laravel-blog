@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Personal;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MessageStoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,7 @@ class MessageStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'body' => 'required|string',
-            'user_id' => 'required|numeric',
+            'message' => 'required|string',
         ];
     }
 }

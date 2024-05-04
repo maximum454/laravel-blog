@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Personal;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Personal\ProfileUpdateRequest;
+use App\Http\Requests\Admin\ProfileUpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -14,13 +13,13 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
         $roles = User::getRoles();
-        return view('personal.profile.index', compact('user','roles'));
+        return view('admin.profile.index', compact('user','roles'));
     }
 
     public function edit(User $user)
     {
 
-        return view('personal.profile.edit', compact('user'));
+        return view('admin.profile.edit', compact('user'));
     }
 
     public function update(ProfileUpdateRequest $request, User $user)
@@ -30,6 +29,6 @@ class ProfileController extends Controller
             $data['avatar'] = Storage::disk('public')->put('/images', $data['avatar']);
         }
         $user->update($data);
-        return view('personal.profile.index', compact('user'));
+        return view('admin.profile.index', compact('user'));
     }
 }

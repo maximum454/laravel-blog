@@ -1,19 +1,19 @@
 <?php
 
-use App\Http\Controllers\Personal\CommentController;
-use App\Http\Controllers\Personal\LikedController;
-use App\Http\Controllers\Personal\MessageController;
-use App\Http\Controllers\Personal\ProfileController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Main\MainController;
-use App\Http\Controllers\Personal\PersonalController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\LikedController;
+use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\PersonalController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Main\MainController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 
 Route::namespace('Main')->group(function () {
@@ -31,30 +31,12 @@ Route::namespace('Main')->group(function () {
     });
 });
 
-Route::namespace('Personal')->prefix('personal')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [PersonalController::class, 'index'])->name('personal.dashboard');
-    Route::get('/messages', [MessageController::class, 'index'])->name('personal.messages');
-    Route::post('/messages', [MessageController::class, 'store'])->name('personal.store');
-    Route::group(['prefix' => 'profile'], function () {
-        Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
-        Route::get('/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/{profile}', [ProfileController::class, 'update'])->name('profile.update');
-    });
-    Route::group(['prefix' => 'liked'], function () {
-        Route::get('/', [LikedController::class, 'index'])->name('like.index');
-        Route::delete('/{post}', [LikedController::class, 'delete'])->name('like.delete');
-    });
-    Route::group(['prefix' => 'comments'], function () {
-        Route::get('/', [CommentController::class, 'index'])->name('comment.index');
-        Route::get('/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
-        Route::patch('/{comment}', [CommentController::class, 'update'])->name('comment.update');
-        Route::delete('/{comment}', [CommentController::class, 'delete'])->name('comment.delete');
-    });
-
-});
-
-Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'AdminMiddleware', 'verified'])->group(function () {
+Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    Route::get('/messages', [MessageController::class, 'index'])->name('admin.messages');
+    Route::post('/messages', [MessageController::class, 'store'])->name('admin.store');
+
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index'])->name('post.index');
         Route::get('/create', [PostController::class, 'create'])->name('post.create');
@@ -94,6 +76,21 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'AdminMiddleware
     Route::group(['prefix' => 'contact'], function () {
         Route::get('/', [ContactController::class, 'index'])->name('contact.index');
         Route::post('/', [ContactController::class, 'submit'])->name('contact.submit');
+    });
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
+        Route::get('/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/{profile}', [ProfileController::class, 'update'])->name('profile.update');
+    });
+    Route::group(['prefix' => 'liked'], function () {
+        Route::get('/', [LikedController::class, 'index'])->name('like.index');
+        Route::delete('/{post}', [LikedController::class, 'delete'])->name('like.delete');
+    });
+    Route::group(['prefix' => 'comments'], function () {
+        Route::get('/', [CommentController::class, 'index'])->name('comment.index');
+        Route::get('/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
+        Route::patch('/{comment}', [CommentController::class, 'update'])->name('comment.update');
+        Route::delete('/{comment}', [CommentController::class, 'delete'])->name('comment.delete');
     });
 });
 

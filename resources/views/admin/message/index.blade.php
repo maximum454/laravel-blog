@@ -1,4 +1,4 @@
-@extends('personal.layouts.main')
+@extends('admin.layouts.main')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -70,7 +70,7 @@
 
         function store() {
             const message = $('#message').val();
-            const url = '{{route('personal.store')}}';
+            const url = '{{route('admin.store')}}';
             const wrp = $('.mes');
             const userId = '{{auth()->user()->id}}';
             const data = {
