@@ -13,7 +13,8 @@ class ProfileController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('personal.profile.index', compact('user'));
+        $roles = User::getRoles();
+        return view('personal.profile.index', compact('user','roles'));
     }
 
     public function edit(User $user)
