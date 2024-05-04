@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Http\Resources\MessageResource;
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -15,13 +16,15 @@ class StoreMessageEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     private $message;
+    private User $user;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(Message $message)
+    public function __construct(Message $message, User $user)
     {
         $this->message = $message;
+        $this->user = $user;
     }
 
     /**
@@ -32,7 +35,7 @@ class StoreMessageEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('store_message'),
+            new Channel('store_message_' . $this->user->id),
         ];
     }
 

@@ -69,6 +69,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified'])->gr
         Route::get('/create', [UserController::class, 'create'])->name('user.create');
         Route::post('/', [UserController::class, 'store'])->name('user.store');
         Route::get('/{user}', [UserController::class, 'show'])->name('user.show');
+        Route::post('/{user}', [UserController::class, 'chat'])->name('user.chat');
         Route::get('/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
         Route::patch('/{user}', [UserController::class, 'update'])->name('user.update');
         Route::delete('/{user}', [UserController::class, 'delete'])->name('user.delete');

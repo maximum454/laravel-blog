@@ -7,15 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MessageStoreRequest;
 use App\Http\Resources\MessageResource;
 use App\Models\Message;
+use App\Models\User;
 
 class MessageController extends Controller
 {
     public function index()
     {
         $user = auth()->user();
-        $messages = Message::all();
-        $messages = MessageResource::collection($messages);
-        return view('admin.message.index', compact('user', 'messages'));
+        $userListMessage = Message::where('recepient_id', $user->id)->distinct()->get(['user_id']);
+        $roles = User::getRoles();
+
+        return view('admin.message.index', compact('user', 'userListMessage','roles'));
     }
 
     public function store(MessageStoreRequest $request)

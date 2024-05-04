@@ -24,22 +24,46 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="form-group">
-                            <label>Сообщение</label>
-                            <div class="mes">
-                                @foreach($messages as $message)
-                                    <div class="item">
-                                        <div>
-                                        {{$message->created_at->diffForHumans()}}
+                        {{$user->id}}
+                        @foreach($userListMessage as $item)
+                            @if($item->user_id != $user->id)
+                                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column" data-id="{{$item->user->id}}">
+                                    <div class="card bg-light d-flex flex-fill">
+                                        <div class="card-header text-muted border-bottom-0">
+                                            @foreach($roles as $role => $name)
+                                                @if($role == $item->user->role)
+                                                    {{$name}}
+                                                @endif
+                                            @endforeach
                                         </div>
-                                        {{$message->body}}
+                                        <div class="card-body pt-0">
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <h2 class="lead"><b>{{$item->user->name}}</b></h2>
+                                                    <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
+                                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-mail-bulk"></i></span> Email #: {{$item->email}}</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-5 text-center">
+                                                    <img src="{{asset('/admin/dist/img/user1-128x128.jpg')}}" alt="user-avatar" class="img-circle img-fluid">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="text-right">
+                                                <a href="#" class="btn btn-sm bg-teal">
+                                                    <i class="fas fa-comments"></i>
+                                                </a>
+                                                <a href="{{route('user.show', $item->user->id)}}" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-user"></i> View Profile
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                @endforeach
-                            </div>
-                            <textarea id="message" name="message" class="form-control" rows="3"
-                                      placeholder="Enter ..."></textarea>
-                        </div>
-                        <button type="button" class="btn btn-primary" onclick="store(this)">Отправить</button>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
                 <!-- /.row -->
@@ -48,58 +72,4 @@
         </section>
         <!-- /.content -->
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log(window.Echo)
-            window.Echo.channel('store_message')
-            .listen('.store_message', res => {
-                const wrp = $('.mes');
-                const item = `
-                    <div class="item">
-                    <div>
-                        ${res.message.time}
-                     </div>
-                        ${res.message.body}
-                    </div>
-                    `
-                wrp.append(item);
-            })
-        })
-
-
-        function store() {
-            const message = $('#message').val();
-            const url = '{{route('admin.store')}}';
-            const wrp = $('.mes');
-            const userId = '{{auth()->user()->id}}';
-            const data = {
-                body: message,
-                user_id: userId,
-            }
-            if(!message){
-                return false
-            }
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': '{{csrf_token()}}',
-                },
-                body: JSON.stringify(data)
-            })
-                .then(res => res.json())
-                .then(res => {
-                    const item = `
-                    <div class="item">
-                    <div>
-                        ${res.time}
-                     </div>
-                        ${res.body}
-                    </div>
-                    `
-                    wrp.append(item);
-                })
-        }
-    </script>
 @endsection

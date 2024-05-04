@@ -27,7 +27,7 @@
                 <ul class="navbar-nav mt-2 mt-lg-0">
                     <li class="nav-item">
                         @auth()
-                            <a class="nav-link" href="{{ route('personal.dashboard') }}">Личный кабинет</a>
+                            <a class="nav-link" href="{{ route('admin.dashboard') }}">Личный кабинет</a>
                         @endauth
                         @guest()
                                 <a class="nav-link" href="{{ route('login') }}">Войти</a>

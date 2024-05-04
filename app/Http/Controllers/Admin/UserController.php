@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\StoreMessageEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MessageStoreRequest;
 use App\Http\Requests\Admin\User\StoreRequest;
 use App\Http\Requests\Admin\User\UpdateRequest;
+use App\Http\Resources\MessageResource;
 use App\Jobs\StoreUserJob;
 use App\Mail\User\PasswordMail;
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -40,7 +44,12 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('admin.user.show', compact('user'));
+        $currentUser = auth()->user();
+        $messages = Message::where('user_id', $currentUser->id)->get();
+        if($messages){
+            $messages = MessageResource::collection($messages);
+        }
+        return view('admin.user.show', compact('user','messages'));
     }
 
     public function edit(User $user)
@@ -60,5 +69,15 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('user.index');
+    }
+
+    public function chat(MessageStoreRequest $request, User $user)
+    {
+        $data = $request->validated();
+        $message = Message::create($data);
+
+        broadcast(new StoreMessageEvent($message, $user))->toOthers();
+
+        return MessageResource::make($message)->resolve();
     }
 }
