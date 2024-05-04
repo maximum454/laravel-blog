@@ -24,7 +24,15 @@
         </div>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('user.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>
+                        Пользователи
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('personal.messages')}}" class="nav-link">
                     <i class="nav-icon fas fa-comments"></i>
                     <p>
                         Чаты

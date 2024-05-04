@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Personal\CommentController;
 use App\Http\Controllers\Personal\LikedController;
+use App\Http\Controllers\Personal\MessageController;
 use App\Http\Controllers\Personal\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ Route::namespace('Main')->group(function () {
 
 Route::namespace('Personal')->prefix('personal')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [PersonalController::class, 'index'])->name('personal.dashboard');
+    Route::get('/messages', [MessageController::class, 'index'])->name('personal.messages');
+    Route::post('/messages', [MessageController::class, 'store'])->name('personal.store');
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
         Route::get('/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -47,6 +50,7 @@ Route::namespace('Personal')->prefix('personal')->middleware(['auth', 'verified'
         Route::patch('/{comment}', [CommentController::class, 'update'])->name('comment.update');
         Route::delete('/{comment}', [CommentController::class, 'delete'])->name('comment.delete');
     });
+
 });
 
 Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'AdminMiddleware', 'verified'])->group(function () {
