@@ -124,7 +124,13 @@
                                 )</h3>
                             @foreach($post->comments as $item)
                                 <div class="card-comment" data-aos="fade-up">
-                                    <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
+                                    @if($item->user->avatar)
+                                        <img src="{{asset('storage/'.$item->user->avatar)}}" class="img-circle elevation-2 img-sm"
+                                             alt="{{auth()->user()->name}}">
+                                    @else
+                                        <img src="{{asset('admin/dist/img/avatar-no.png')}}" class="img-circle elevation-2 img-sm"
+                                             alt="{{auth()->user()->name}}">
+                                    @endif
 
                                     <div class="comment-text">
                                         <div class="username">

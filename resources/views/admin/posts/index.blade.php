@@ -25,62 +25,110 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <a href="{{route('post.create')}}" class="btn btn-primary">Добавить</a>
-                        <div class="card mt-2">
-                            <div class="card-header">
-                                <h3 class="card-title">Responsive Hover Table</h3>
+                        <div class="mb-3">
+                            <a href="{{route('post.create')}}" class="btn btn-success">
+                                <i class="fas fa-plus"></i>
+                                Добавить
+                            </a>
+                            <a href="{{route('category.index')}}" class="btn btn-primary">
+                                <i class="fas fa-th-list"></i>
+                                Категория
+                            </a>
+                            <a href="{{route('comment.index')}}" class="btn btn-primary">
+                                <i class="fas fa-comment"></i>
+                                Комментарии
+                            </a>
+                            <a href="{{route('tag.index')}}" class="btn btn-primary">
+                                <i class="fas fa-tags"></i>
+                                Теги
+                            </a>
+                        </div>
 
-                                <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                               placeholder="Search">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
+                        <form action="enhanced-results.html">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Result Type:</label>
+                                        <select class="select2" multiple="multiple" data-placeholder="Any"
+                                                style="width: 100%;">
+                                            <option>Text only</option>
+                                            <option>Images</option>
+                                            <option>Video</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label>Sort Order:</label>
+                                        <select class="select2" style="width: 100%;">
+                                            <option selected>ASC</option>
+                                            <option>DESC</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label>Order By:</label>
+                                        <select class="select2" style="width: 100%;">
+                                            <option selected>Title</option>
+                                            <option>Date</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Название</th>
-                                        <th>Описание</th>
-                                        <th colspan="3">Действия</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($posts as $item)
-                                        <tr class="align-content-center">
-                                            <td>{{$item->id}}</td>
-                                            <td>{{$item->title}}</td>
-                                            <td>{{$item->content}}</td>
-                                            <td>
-                                                <a href="{{route('post.show', $item->id)}}" class="btn btn-link"><i class="fas fa-eye"></i></a>
-                                            </td>
-                                            <td>
-                                                <a href="{{route('post.edit', $item->id)}}" class="btn btn-link"><i class="fas fa-pen"></i></a>
-                                            </td>
-                                            <td>
-                                                <form action="{{route('post.delete', $item->id)}}" method="post" class="inline">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-link"><i class="fas fa-trash"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                            <div class="form-group">
+                                <div class="input-group input-group-lg">
+                                    <input type="search" class="form-control form-control-lg"
+                                           placeholder="Type your keywords here" value="Lorem ipsum">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-lg btn-default">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- /.card-body -->
+                        </form>
+                        <div class="list-group">
+                            @foreach($posts as $item)
+                                <div class="list-group-item" data-id="{{$item->id}}">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            @if($item->preview_image)
+                                                <img class="img-fluid" src="{{asset('storage/'.$item->preview_image)}}"
+                                                     alt="Photo" style="max-height: 160px;">
+                                            @else
+                                                <img class="img-fluid" src="{{asset('admin/dist/img/no-picture.jpg')}}"
+                                                     alt="Photo" style="max-height: 160px;">
+                                            @endif
+                                        </div>
+                                        <div class="col px-4">
+                                            <div>
+                                                <div class="float-right"> {{$item->created_at->day}} {{$item->created_at->translatedFormat('F')}} {{$item->created_at->year}}</div>
+                                                <h3>{{$item->title}}</h3>
+                                                <p class="mb-0">{{Illuminate\Support\Str::limit(strip_tags($item->content),200)}}</p>
+                                                <div class="mt-3">
+                                                    <a href="{{route('post.show', $item->id)}}" class="btn btn-primary"><i
+                                                            class="fas fa-eye"></i></a>
+                                                    <a href="{{route('post.edit', $item->id)}}" class="btn btn-primary"><i
+                                                            class="fas fa-pen"></i></a>
+                                                    <form action="{{route('post.delete', $item->id)}}" method="post"
+                                                          class="d-inline">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-danger"><i
+                                                                class="fas fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                        <!-- /.card -->
+
+                        <nav aria-label="Page Navigation">
+                            {{$posts->links()}}
+                        </nav>
                     </div>
                 </div>
                 <!-- /.row -->

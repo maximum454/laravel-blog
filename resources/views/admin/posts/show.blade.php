@@ -19,10 +19,19 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-12">
-                    <a href="{{route('post.edit', $post->id) }}" class="btn btn-primary">Редактировать</a>
+                    <div class="mb-3">
+                        <a href="{{route('post.edit', $post->id) }}" class="btn btn-primary">
+                            <i class="fas fa-pen"></i>
+                            Редактировать
+                        </a>
+                        <a href="{{route('post.comments', $post->id)}}" class="btn btn-primary">
+                            <i class="fas fa-comment"></i>
+                            Комментарии
+                        </a>
+                    </div>
                     <div class="card mt-2">
                         <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
+                            <table class="table table-hover">
 
                                 <tbody>
                                     <tr>
@@ -35,7 +44,7 @@
                                     </tr>
                                     <tr>
                                         <th>Контент</th>
-                                        <td>{!! $post->content !!}</td>
+                                        <td>{{Illuminate\Support\Str::limit(strip_tags($post->content),200)}}</td>
                                     </tr>
                                     <tr>
                                         <th>Превью</th>

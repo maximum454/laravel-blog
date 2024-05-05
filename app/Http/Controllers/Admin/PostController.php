@@ -25,7 +25,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(9);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -40,7 +40,6 @@ class PostController extends Controller
     {
         $data = $request->validated();
         $this->service->store($data);
-
         return redirect()->route('post.index');
     }
 
@@ -67,6 +66,11 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect()->route('post.index');
+    }
+
+    public function comments(Post $post)
+    {
+        return view('admin.posts.comments', compact('post'));
     }
 
 }

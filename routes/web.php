@@ -43,6 +43,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified'])->gr
         Route::post('/', [PostController::class, 'store'])->name('post.store');
         Route::get('/{post}', [PostController::class, 'show'])->name('post.show');
         Route::get('/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+        Route::get('/{post}/comments', [PostController::class, 'comments'])->name('post.comments');
         Route::patch('/{post}', [PostController::class, 'update'])->name('post.update');
         Route::delete('/{post}', [PostController::class, 'delete'])->name('post.delete');
     });

@@ -18,8 +18,32 @@ class PostService
                 $tagsIds = $data['tag_ids'];
                 unset($data['tag_ids']);
             }
-            $data['preview_image'] = Storage::disk('publick')->put('/images', $data['preview_image']);
-            $data['main_image'] = Storage::disk('publick')->put('/images', $data['main_image']);
+            $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
+            $data['main_image'] = Storage::disk('public')->put('/images', $data['main_image']);
+
+            $content = $data['content'];
+            $dom = new \DomDocument();
+            $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $imageFile = $dom->getElementsByTagName('img');
+
+            foreach ($imageFile as $item => $image) {
+
+                $data2 = $image->getAttribute('src');
+                list($type, $data2) = explode(';', $data2);
+                list(, $data2)      = explode(',', $data2);
+                $imgeData = base64_decode($data2);
+                $image_name = "/storage/images/" . time() . $item . '.png';
+                $path = public_path() . $image_name;
+                file_put_contents($path, $imgeData);
+
+                $image->removeAttribute('src');
+                $image->setAttribute('src', $image_name);
+            }
+
+            $content = $dom->saveHTML();
+
+            $data['content'] = $content;
+
             $post = Post::firstOrCreate($data);
             if (isset($tagsIds)) {
                 $post->tags()->sync($tagsIds);
@@ -45,6 +69,31 @@ class PostService
             if (isset($data['main_image'])) {
                 $data['main_image'] = Storage::disk('public')->put('/images', $data['main_image']);
             }
+
+
+            $content = $data['content'];
+            $dom = new \DomDocument();
+            $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $imageFile = $dom->getElementsByTagName('img');
+
+            foreach ($imageFile as $item => $image) {
+
+                $data2 = $image->getAttribute('src');
+                list($type, $data2) = explode(';', $data2);
+                list(, $data2)      = explode(',', $data2);
+                $imgeData = base64_decode($data2);
+                $image_name = "/storage/images/" . time() . $item . '.png';
+                $path = public_path() . $image_name;
+                file_put_contents($path, $imgeData);
+
+                $image->removeAttribute('src');
+                $image->setAttribute('src', $image_name);
+            }
+
+            $content = $dom->saveHTML();
+
+            $data['content'] = $content;
+
             $post->update($data);
             if (isset($tagsIds)) {
                 $post->tags()->sync($tagsIds);

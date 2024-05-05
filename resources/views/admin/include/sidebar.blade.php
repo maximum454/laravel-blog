@@ -22,6 +22,8 @@
             </div>
         </div>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            @if(auth()->user()->isAdmin())
+
             <li class="nav-item">
                 <a href="{{route('user.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-user"></i>
@@ -30,6 +32,7 @@
                     </p>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a href="{{route('post.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-clipboard"></i>
@@ -38,22 +41,8 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{route('category.index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-th-list"></i>
-                    <p>
-                        Категория
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('tag.index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-tags"></i>
-                    <p>
-                        Теги
-                    </p>
-                </a>
-            </li>
+
+
             <li class="nav-item">
                 <a href="{{route('admin.messages')}}" class="nav-link">
                     <i class="nav-icon fas fa-comments"></i>
@@ -70,14 +59,7 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{route('comment.index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-comment"></i>
-                    <p>
-                        Комментарии
-                    </p>
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a href="{{route('contact.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-edit"></i>

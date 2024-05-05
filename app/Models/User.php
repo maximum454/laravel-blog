@@ -28,6 +28,18 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * @return bool
+     */
+    public static function isAdmin()
+    {
+        $currentUser = auth()->user();
+        if($currentUser->role == 0){
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
