@@ -71,8 +71,9 @@ jobs:
             username: ${{ secrets.FTP_USERNAME }}
             password: ${{ secrets.FTP_PASSWORD }}
             server-dir: /laravel_blog/public_html/
-            local-dir: ./dist/
+            local-dir: ./
             exclude: |
               **/.git*
               **/.git*/**
               **/node_modules/**
+              **/vendor/**
