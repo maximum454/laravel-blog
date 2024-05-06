@@ -22,7 +22,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = User::paginate(9);
+        $currentUser = auth()->user();
+        $user = User::where('id','!=',$currentUser->id)->paginate(9);
         $roles = User::getRoles();
         return view('admin.user.index', compact('user','roles'));
     }
