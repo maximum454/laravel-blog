@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Main\MainController;
+use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,8 +35,6 @@ Route::namespace('Main')->group(function () {
 Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
-    Route::get('/messages', [MessageController::class, 'index'])->name('admin.messages');
-    Route::post('/messages', [MessageController::class, 'store'])->name('admin.store');
 
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index'])->name('post.index');
@@ -70,7 +69,6 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified'])->gr
         Route::get('/create', [UserController::class, 'create'])->name('user.create');
         Route::post('/', [UserController::class, 'store'])->name('user.store');
         Route::get('/{user}', [UserController::class, 'show'])->name('user.show');
-        Route::post('/{user}', [UserController::class, 'chat'])->name('user.chat');
         Route::get('/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
         Route::patch('/{user}', [UserController::class, 'update'])->name('user.update');
         Route::delete('/{user}', [UserController::class, 'delete'])->name('user.delete');
@@ -93,6 +91,11 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified'])->gr
         Route::get('/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
         Route::patch('/{comment}', [CommentController::class, 'update'])->name('comment.update');
         Route::delete('/{comment}', [CommentController::class, 'delete'])->name('comment.delete');
+    });
+    Route::group(['prefix' => 'chat'], function () {
+        Route::get('/', [MessageController::class, 'index'])->name('chat.index');
+        Route::get('/{user}/message', [MessageController::class, 'show'])->name('chat.show');
+        Route::post('/{user}/message', [MessageController::class, 'chat'])->name('chat.store');
     });
 });
 

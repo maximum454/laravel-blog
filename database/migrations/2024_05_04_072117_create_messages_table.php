@@ -13,10 +13,16 @@ return new class extends Migration {
         if (!Schema::hasTable('messages')) {
             Schema::create('messages', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-                $table->foreignId('channel_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-                $table->text('body');
                 $table->timestamps();
+                $table->text('body');
+                $table->unsignedBigInteger('user_from');
+                $table->unsignedBigInteger('user_to');
+
+                $table->index('user_from','user_from_idx');
+                $table->index('user_to','user_to_idx');
+
+                $table->foreign('user_from','user_from_fk')->on('users')->references('id');
+                $table->foreign('user_to','user_to_fk')->on('users')->references('id');
             });
         }
     }

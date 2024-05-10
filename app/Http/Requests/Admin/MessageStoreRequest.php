@@ -23,8 +23,8 @@ class MessageStoreRequest extends FormRequest
     {
         return [
             'body' => 'required|string',
-            'user_id' => 'required|numeric',
-            'recepient_id' => 'required|numeric',
+            'user_from' => 'required|numeric',
+            'user_to' => 'required|numeric',
         ];
     }
 }

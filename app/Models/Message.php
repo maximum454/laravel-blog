@@ -12,7 +12,7 @@ class Message extends Model
     protected $table = 'messages';
     protected $guarded = false;
 
-    protected $fillable = ['id', 'user_id', 'recepient_id', 'body'];
+    protected $fillable = ['id', 'user_from', 'user_to', 'body'];
 
     /**
      * @return BelongsTo

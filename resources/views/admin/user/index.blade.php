@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="card-footer">
                                             <div class="text-right">
-                                                <a href="#" class="btn btn-sm bg-teal">
+                                                <a href="{{route('chat.show', $item->id)}}" class="btn btn-sm bg-teal">
                                                     <i class="fas fa-comments"></i>
                                                 </a>
                                                 <a href="{{route('user.show', $item->id)}}" class="btn btn-sm btn-primary">

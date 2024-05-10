@@ -46,7 +46,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $currentUser = auth()->user();
-        $messages = Message::where('user_id', $currentUser->id)->get();
+        $messages = Message::where('user_from', $currentUser->id)->get();
         if($messages){
             $messages = MessageResource::collection($messages);
         }
@@ -70,15 +70,5 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('user.index');
-    }
-
-    public function chat(MessageStoreRequest $request, User $user)
-    {
-        $data = $request->validated();
-        $message = Message::create($data);
-
-        broadcast(new StoreMessageEvent($message, $user))->toOthers();
-
-        return MessageResource::make($message)->resolve();
     }
 }

@@ -15,7 +15,7 @@ class StoreMessageEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private $message;
+    private Message $message;
     private User $user;
 
     /**
