@@ -17,8 +17,11 @@ class Message extends Model
     /**
      * @return BelongsTo
      */
-    public function user(): BelongsTo {
-        return $this->belongsTo(User::class, 'user_id');
+    public function userFrom(): BelongsTo {
+        return $this->belongsTo(User::class, 'user_from', 'id');
+    }
+    public function userTo(): BelongsTo {
+        return $this->belongsTo(User::class, 'user_to', 'id');
     }
 
     /**

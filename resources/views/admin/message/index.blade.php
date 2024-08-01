@@ -26,7 +26,6 @@
                     <div class="col-12">
                         {{$user->id}}
                         @foreach($userListMessage as $item)
-                            @dd($item);
                             @if($item->user_id != $user->id)
                                 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column" data-id="{{$item->user->id}}">
                                     <div class="card bg-light d-flex flex-fill">

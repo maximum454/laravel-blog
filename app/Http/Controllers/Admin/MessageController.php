@@ -16,8 +16,7 @@ class MessageController extends Controller
     {
         $currentUser = auth()->user();
         $roles = User::getRoles();
-        $userListMessage = Message::where('user_from', $currentUser->id)->orWhere('user_to', $currentUser->id)->get();
-
+        $userListMessage = Message::where('user_to', $currentUser->id)->get();
         return view('admin.message.index', compact('user', 'userListMessage','roles'));
     }
     public function show(User $user)

@@ -35,7 +35,15 @@ Route::namespace('Main')->group(function () {
 Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
-
+    Route::group(['prefix' => 'plants'], function () {
+        Route::get('/', [PlantController::class, 'index'])->name('plant.index');
+        Route::get('/create', [PlantController::class, 'create'])->name('plant.create');
+        Route::post('/', [PlantController::class, 'store'])->name('plant.store');
+        Route::get('/{plant}', [PlantController::class, 'show'])->name('plant.show');
+        Route::get('/{plant}/edit', [PlantController::class, 'edit'])->name('plant.edit');
+        Route::patch('/{plant}', [PlantController::class, 'update'])->name('plant.update');
+        Route::delete('/{plant}', [PlantController::class, 'delete'])->name('plant.delete');
+    });
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index'])->name('post.index');
         Route::get('/create', [PostController::class, 'create'])->name('post.create');
