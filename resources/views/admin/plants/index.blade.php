@@ -30,7 +30,7 @@
                                 <i class="fas fa-plus"></i>
                                 Добавить
                             </a>
-                            <a href="{{route('category.index')}}" class="btn btn-primary">
+                            <a href="{{route('plant.category.index')}}" class="btn btn-primary">
                                 <i class="fas fa-th-list"></i>
                                 Категория
                             </a>

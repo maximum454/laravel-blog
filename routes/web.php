@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\LikedController;
 use App\Http\Controllers\Admin\MessageController;
-use App\Http\Controllers\Admin\PersonalController;
+use App\Http\Controllers\Admin\PlantCategoryController;
 use App\Http\Controllers\Admin\PlantController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -45,6 +45,17 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified'])->gr
         Route::patch('/{plant}', [PlantController::class, 'update'])->name('plant.update');
         Route::delete('/{plant}', [PlantController::class, 'delete'])->name('plant.delete');
     });
+
+    Route::group(['prefix' => 'plants-categories'], function () {
+        Route::get('/', [PlantCategoryController::class, 'index'])->name('plant.category.index');
+        Route::get('/create', [PlantCategoryController::class, 'create'])->name('plant.category.create');
+        Route::post('/', [PlantCategoryController::class, 'store'])->name('plant.category.store');
+        Route::get('/{category}', [PlantCategoryController::class, 'show'])->name('plant.category.show');
+        Route::get('/{category}/edit', [PlantCategoryController::class, 'edit'])->name('plant.category.edit');
+        Route::patch('/{category}', [PlantCategoryController::class, 'update'])->name('plant.category.update');
+        Route::delete('/{category}', [PlantCategoryController::class, 'delete'])->name('plant.category.delete');
+    });
+
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index'])->name('post.index');
         Route::get('/create', [PostController::class, 'create'])->name('post.create');

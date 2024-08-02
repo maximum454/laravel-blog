@@ -18,7 +18,7 @@ class Plant extends Model
 
     public function category()
     {
-        return $this->belongsTo(PlantCategories::class, 'plant_category_id', 'id');
+        return $this->belongsTo(PlantCategory::class, 'plant_category_id', 'id');
     }
 
     public function tags()

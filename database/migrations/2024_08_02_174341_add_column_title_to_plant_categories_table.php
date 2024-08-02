@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('planttags', function (Blueprint $table) {
-            $table->id();
+        Schema::table('plant_categories', function (Blueprint $table) {
             $table->string('title');
-            $table->timestamps();
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('planttags');
+        Schema::table('plant_categories', function (Blueprint $table) {
+            $table->dropColumn('title');
+        });
     }
 };

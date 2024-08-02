@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plant_categories', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        if (!Schema::hasTable('plant_categories')) {
+            Schema::create('plant_categories', function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
+
     }
 
     /**

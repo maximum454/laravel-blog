@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PlantCategories extends Model
+class PlantTag extends Model
 {
-    use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'plant_categories';
+    protected $table = 'plant_tags';
     protected $guarded = false;
 }
