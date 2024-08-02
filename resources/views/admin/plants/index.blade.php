@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Посты</h1>
+                        <h1 class="m-0">Растения</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Посты</li>
+                            <li class="breadcrumb-item active">Растения</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -26,17 +26,13 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="mb-3">
-                            <a href="{{route('post.create')}}" class="btn btn-success">
+                            <a href="{{route('plant.create')}}" class="btn btn-success">
                                 <i class="fas fa-plus"></i>
                                 Добавить
                             </a>
                             <a href="{{route('category.index')}}" class="btn btn-primary">
                                 <i class="fas fa-th-list"></i>
                                 Категория
-                            </a>
-                            <a href="{{route('comment.index')}}" class="btn btn-primary">
-                                <i class="fas fa-comment"></i>
-                                Комментарии
                             </a>
                             <a href="{{route('tag.index')}}" class="btn btn-primary">
                                 <i class="fas fa-tags"></i>
@@ -89,7 +85,7 @@
                             </div>
                         </form>
                         <div class="list-group">
-                            @foreach($posts as $item)
+                            @foreach($plants as $item)
                                 <div class="list-group-item" data-id="{{$item->id}}">
                                     <div class="row">
                                         <div class="col-auto">
@@ -127,7 +123,7 @@
                         </div>
 
                         <nav aria-label="Page Navigation">
-                            {{$posts->links()}}
+                            {{$plants->links()}}
                         </nav>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\LikedController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PersonalController;
+use App\Http\Controllers\Admin\PlantController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\TagController;

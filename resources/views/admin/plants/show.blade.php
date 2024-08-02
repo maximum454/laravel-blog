@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Пост</h1>
+                    <h1 class="m-0">Растение</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -20,11 +20,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-3">
-                        <a href="{{route('post.edit', $post->id) }}" class="btn btn-primary">
+                        <a href="{{route('post.edit', $plant->id) }}" class="btn btn-primary">
                             <i class="fas fa-pen"></i>
                             Редактировать
                         </a>
-                        <a href="{{route('post.comments', $post->id)}}" class="btn btn-primary">
+                        <a href="{{route('post.comments', $plant->id)}}" class="btn btn-primary">
                             <i class="fas fa-comment"></i>
                             Комментарии
                         </a>
@@ -36,32 +36,32 @@
                                 <tbody>
                                     <tr>
                                         <th>ID</th>
-                                        <td>{{$post->id}}</td>
+                                        <td>{{$plant->id}}</td>
                                     </tr>
                                     <tr>
                                         <th>Заголовок</th>
-                                        <td>{{$post->title}}</td>
+                                        <td>{{$plant->title}}</td>
                                     </tr>
                                     <tr>
                                         <th>Контент</th>
-                                        <td>{{Illuminate\Support\Str::limit(strip_tags($post->content),200)}}</td>
+                                        <td>{{Illuminate\Support\Str::limit(strip_tags($plant->content),200)}}</td>
                                     </tr>
                                     <tr>
                                         <th>Превью</th>
-                                        <td><img src="{{asset('storage/'.$post->preview_image)}}" width="120" height="120" alt=""></td>
+                                        <td><img src="{{asset('storage/'.$plant->preview_image)}}" width="120" height="120" alt=""></td>
                                     </tr>
                                     <tr>
                                         <th>Главная</th>
-                                        <td><img src="{{asset('storage/'.$post->main_image)}}" width="120"  alt=""></td>
+                                        <td><img src="{{asset('storage/'.$plant->main_image)}}" width="120"  alt=""></td>
                                     </tr>
                                     <tr>
                                         <th>Категория</th>
-                                        <td>{{$post->category->title}}</td>
+                                        <td>{{$plant->category->title}}</td>
                                     </tr>
                                     <tr>
                                         <th>Теги</th>
                                         <td>
-                                            @foreach($post->tags as $tag)
+                                            @foreach($plant->tags as $tag)
                                             {{$tag->title}}
                                             @endforeach
                                         </td>

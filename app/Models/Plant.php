@@ -14,6 +14,15 @@ class Plant extends Model
     protected $table = 'plants';
     protected $guarded = false;
 
-    protected $withCount = ['likedUsers'];
     protected $with = ['category'];
+
+    public function category()
+    {
+        return $this->belongsTo(PlantCategories::class, 'plant_category_id', 'id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(PlantTag::class, 'plant_tags', 'plant_id', 'plant_tag_id');
+    }
 }

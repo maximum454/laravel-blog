@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Создание поста</h1>
+                        <h1 class="m-0">Внести растение</h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -21,9 +21,17 @@
                     @csrf
                     <div class="col-md-8">
                         <div class="form-group">
-                            <label for="name">Название поста</label>
+                            <label for="name">Название растения</label>
                             <input type="text" class="form-control" id="name" name="title" placeholder="Название"
                                    value="{{old('title')}}">
+                            @error('title')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Второе название растения</label>
+                            <input type="text" class="form-control" id="name" name="title" placeholder="Название второе"
+                                   value="{{old('title_second')}}">
                             @error('title')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
