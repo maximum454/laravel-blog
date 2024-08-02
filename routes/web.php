@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\LikedController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PlantCategoryController;
 use App\Http\Controllers\Admin\PlantController;
+use App\Http\Controllers\Admin\PlantTagController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\TagController;
@@ -54,6 +55,15 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified'])->gr
         Route::get('/{category}/edit', [PlantCategoryController::class, 'edit'])->name('plant.category.edit');
         Route::patch('/{category}', [PlantCategoryController::class, 'update'])->name('plant.category.update');
         Route::delete('/{category}', [PlantCategoryController::class, 'delete'])->name('plant.category.delete');
+    });
+    Route::group(['prefix' => 'plant-tags'], function () {
+        Route::get('/', [PlantTagController::class, 'index'])->name('plant.tag.index');
+        Route::get('/create', [PlantTagController::class, 'create'])->name('plant.tag.create');
+        Route::post('/', [PlantTagController::class, 'store'])->name('plant.tag.store');
+        Route::get('/{tag}', [PlantTagController::class, 'show'])->name('plant.tag.show');
+        Route::get('/{tag}/edit', [PlantTagController::class, 'edit'])->name('plant.tag.edit');
+        Route::patch('/{tag}', [PlantTagController::class, 'update'])->name('plant.tag.update');
+        Route::delete('/{tag}', [PlantTagController::class, 'delete'])->name('plant.tag.delete');
     });
 
     Route::group(['prefix' => 'posts'], function () {
