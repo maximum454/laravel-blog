@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Создание Тега</h1>
+                        <h1 class="m-0">Тег для растения</h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -19,7 +19,7 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{route('tag.store')}}" method="POST" class="w-25">
+                        <form action="{{route('plant.tag.store')}}" method="POST" class="w-25">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Название тега</label>

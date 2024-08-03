@@ -34,7 +34,7 @@
                                 <i class="fas fa-th-list"></i>
                                 Категория
                             </a>
-                            <a href="{{route('tag.index')}}" class="btn btn-primary">
+                            <a href="{{route('plant.tag.index')}}" class="btn btn-primary">
                                 <i class="fas fa-tags"></i>
                                 Теги
                             </a>
@@ -103,11 +103,11 @@
                                                 <h3>{{$item->title}}</h3>
                                                 <p class="mb-0">{{Illuminate\Support\Str::limit(strip_tags($item->content),200)}}</p>
                                                 <div class="mt-3">
-                                                    <a href="{{route('post.show', $item->id)}}" class="btn btn-primary"><i
+                                                    <a href="{{route('plant.show', $item->id)}}" class="btn btn-primary"><i
                                                             class="fas fa-eye"></i></a>
-                                                    <a href="{{route('post.edit', $item->id)}}" class="btn btn-primary"><i
+                                                    <a href="{{route('plant.edit', $item->id)}}" class="btn btn-primary"><i
                                                             class="fas fa-pen"></i></a>
-                                                    <form action="{{route('post.delete', $item->id)}}" method="post"
+                                                    <form action="{{route('plant.delete', $item->id)}}" method="post"
                                                           class="d-inline">
                                                         @csrf
                                                         @method('delete')

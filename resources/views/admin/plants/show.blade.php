@@ -20,13 +20,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-3">
-                        <a href="{{route('post.edit', $plant->id) }}" class="btn btn-primary">
+                        <a href="{{route('plant.edit', $plant->id) }}" class="btn btn-primary">
                             <i class="fas fa-pen"></i>
                             Редактировать
-                        </a>
-                        <a href="{{route('post.comments', $plant->id)}}" class="btn btn-primary">
-                            <i class="fas fa-comment"></i>
-                            Комментарии
                         </a>
                     </div>
                     <div class="card mt-2">
@@ -52,7 +48,7 @@
                                     </tr>
                                     <tr>
                                         <th>Главная</th>
-                                        <td><img src="{{asset('storage/'.$plant->main_image)}}" width="120"  alt=""></td>
+                                        <td><img src="{{asset('storage/'.$plant->detail_image)}}" width="120"  alt=""></td>
                                     </tr>
                                     <tr>
                                         <th>Категория</th>

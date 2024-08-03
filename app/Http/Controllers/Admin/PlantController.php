@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Plant\StoreRequest;
 use App\Http\Requests\Admin\Plant\UpdateRequest;
-use App\Models\Category;
 use App\Models\Plant;
-use App\Models\PlantCategories;
-use App\Models\Tag;
+use App\Models\PlantCategory;
+use App\Models\PlantTag;
 use App\Service\plantservice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +18,7 @@ class PlantController extends Controller
 
     public $service;
 
-    public function __construct(plantservice $service)
+    public function __construct(PlantService $service)
     {
         $this->service = $service;
     }
@@ -32,8 +31,8 @@ class PlantController extends Controller
 
     public function create()
     {
-        $categories = PlantCategories::all();
-        $tags = Tag::all();
+        $categories = PlantCategory::all();
+        $tags = PlantTag::all();
         return view('admin.plants.create', compact('categories', 'tags'));
     }
 
@@ -51,8 +50,8 @@ class PlantController extends Controller
 
     public function edit(Plant $plant)
     {
-        $categories = PlantCategories::all();
-        $tags = Tag::all();
+        $categories = PlantCategory::all();
+        $tags = PlantTag::all();
         return view('admin.plants.edit', compact('plant', 'categories', 'tags'));
     }
 
@@ -60,6 +59,7 @@ class PlantController extends Controller
     {
         $data = $request->validated();
         $plant = $this->service->update($data, $plant);
+        dd(1);
         return view('admin.plants.show', compact('plant'));
     }
 

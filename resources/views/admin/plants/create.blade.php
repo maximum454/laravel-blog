@@ -17,12 +17,12 @@
         <section class="content">
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
-                <form class="row" action="{{route('post.store')}}" method="POST" enctype="multipart/form-data">
+                <form class="row" action="{{route('plant.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="name">Название растения</label>
-                            <input type="text" class="form-control" id="name" name="title" placeholder="Название"
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Название"
                                    value="{{old('title')}}">
                             @error('title')
                             <div class="text-danger">{{$message}}</div>
@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Второе название растения</label>
-                            <input type="text" class="form-control" id="name" name="title" placeholder="Название второе"
+                            <input type="text" class="form-control" id="title_second" name="title_second" placeholder="Название второе"
                                    value="{{old('title_second')}}">
                             @error('title')
                             <div class="text-danger">{{$message}}</div>
@@ -38,14 +38,14 @@
                         </div>
                         <div class="form-group">
                             <label>Выберите категорию</label>
-                            <select name="category_id" class="form-control">
+                            <select name="plant_category_id" class="form-control">
                                 @foreach($categories as $item)
                                     <option value="{{$item->id}}"
-                                        {{$item->id == old('category_id') ? 'selected': ''}}
+                                        {{$item->id == old('plant_category_id') ? 'selected': ''}}
                                     >{{$item->title}}</option>
                                 @endforeach
                             </select>
-                            @error('category_id')
+                            @error('plant_category_id')
                             <div class="text-danger">Обязательное поле</div>
                             @enderror
                         </div>
@@ -73,10 +73,11 @@
                             @enderror
                         </div>
                         <div class="mt-4 mb-4">
-                            <a href="{{route('post.index')}}" class="btn btn-secondary">Отменить</a>
+                            <a href="{{route('plant.index')}}" class="btn btn-secondary">Отменить</a>
                             <button type="submit" class="btn btn-success float-right">Обновить</button>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="card card-primary">
                             <div class="card-header">
@@ -109,11 +110,11 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" name="main_image" class="custom-file-input" id="exampleInputFile2">
+                                            <input type="file" name="detail_image" class="custom-file-input" id="exampleInputFile2">
                                             <label class="custom-file-label" for="exampleInputFile2">Выберите изображение</label>
                                         </div>
                                     </div>
-                                    @error('main_image')
+                                    @error('detail_image')
                                     <div class="text-danger">Обязательное поле</div>
                                     @enderror
                                 </div>

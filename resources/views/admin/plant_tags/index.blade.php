@@ -19,7 +19,7 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <a href="{{route('tag.create')}}" class="btn btn-primary">Добавить</a>
+                        <a href="{{route('plant.tag.create')}}" class="btn btn-primary">Добавить</a>
                         <div class="card mt-2">
                             <div class="card-header">
                                 <h3 class="card-title">Responsive Hover Table</h3>

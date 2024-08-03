@@ -23,6 +23,6 @@ class Plant extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(PlantTag::class, 'plant_tags', 'plant_id', 'plant_tag_id');
+        return $this->belongsToMany(PlantTag::class, 'plant_tag_ids', 'plant_id', 'tag_id');
     }
 }

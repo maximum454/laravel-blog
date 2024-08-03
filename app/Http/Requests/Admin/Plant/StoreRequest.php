@@ -23,12 +23,13 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
+            'title_second' => 'nullable|string',
             'content' => 'required|string',
             'preview_image' => 'required|file',
-            'main_image' => 'required|file',
-            'category_id' => 'required|integer|exists:categories,id',
+            'detail_image' => 'required|file',
+            'plant_category_id' => 'required|integer|exists:plant_categories,id',
             'tag_ids' => 'nullable|array',
-            'tag_ids.*' => 'nullable|integer|exists:tags,id',
+            'tag_ids.*' => 'nullable|integer|exists:plant_tags,id',
         ];
     }
 

@@ -41,14 +41,14 @@
                         </div>
                         <div class="form-group">
                             <label>Выберите категорию</label>
-                            <select name="category_id" class="form-control">
+                            <select name="plant_category_id" class="form-control">
                                 @foreach($categories as $item)
                                     <option value="{{$item->id}}"
-                                        {{$item->id == $plant->category_id ? 'selected': ''}}
+                                        {{$item->id == $plant->plant_category_id ? 'selected': ''}}
                                     >{{$item->title}}</option>
                                 @endforeach
                             </select>
-                            @error('category_id')
+                            @error('plant_category_id')
                             <div class="text-danger">Обязательное поле</div>
                             @enderror
                         </div>
@@ -89,10 +89,12 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="form-group">
+                                    @if($plant->preview_image)
                                     <div class="mb-3">
                                         <img class="img-fluid w-100" src="{{ asset('storage/'.$plant->preview_image)}}"
                                              width="120" height="120" alt="">
                                     </div>
+                                    @endif
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" name="preview_image" class="custom-file-input"
@@ -116,19 +118,21 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="form-group">
+                                    @if($plant->detail_image)
                                     <div class="mb-3">
-                                        <img class="img-fluid w-100" src="{{asset('storage/'.$plant->main_image)}}"
+                                        <img class="img-fluid w-100" src="{{asset('storage/'.$plant->detail_image)}}"
                                              width="120" height="120" alt="">
                                     </div>
+                                    @endif
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" name="main_image" class="custom-file-input"
+                                            <input type="file" name="detail_image" class="custom-file-input"
                                                    id="exampleInputFile">
                                             <label class="custom-file-label" for="exampleInputFile">Выберите
                                                 изображение</label>
                                         </div>
                                     </div>
-                                    @error('main_image')
+                                    @error('detail_image')
                                     <div class="text-danger">Обязательное поле</div>
                                     @enderror
                                 </div>

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PlantTag extends Model
 {
+    use HasFactory;
     use SoftDeletes;
 
     protected $table = 'plant_tags';
