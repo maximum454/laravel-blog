@@ -14,7 +14,10 @@
                                 class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('main.about')}}">О нас</a>
+                        <a class="nav-link" href="{{route('main.about')}}">О сайте</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('plants.index')}}">Травы</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="{{route('main.blog')}}">Блог</a>

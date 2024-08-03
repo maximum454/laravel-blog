@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Main\MainController;
+use App\Http\Controllers\Main\MainPlantsController;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,11 @@ Route::namespace('Main')->group(function () {
     Route::get('/blog', [MainController::class, 'blog'])->name('main.blog');
     Route::get('/post/{id}', [MainController::class, 'post'])->name('main.blog.post');
     Route::get('/contact', [MainController::class, 'contact'])->name('main.contact');
+
+    Route::group(['prefix' => 'plants'], function () {
+        Route::get('/', [MainPlantsController::class, 'index'])->name('plants.index');
+        Route::get('/{id}', [MainPlantsController::class, 'detail'])->name('plant.detail');
+    });
 
     Route::prefix('{post}/comments')->group(function (){
         Route::post('/',[MainController::class, 'comment'])->name('post.comment');

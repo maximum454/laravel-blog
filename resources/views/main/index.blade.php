@@ -17,8 +17,8 @@
                             <h1 >Get Started Power social proof for your brands.</h1>
                             <p>He has led a remarkable campaign, defying the traditional mainstream parties courtesy of his En Marche! movement.</p>
                             <div class="carousel-content-btns">
-                                <a href="#!" class="btn btn-success"> <i class="fab fa-apple mr-2"></i> App Store</a>
-                                <a href="#!" class="btn btn-secondary"> <i class="fab fa-android mr-2"></i>  Google Play</a>
+                                <a href="#!" class="btn btn-success"> <i class="fab fa-apple mr-2"></i> Травы</a>
+                                <a href="#!" class="btn btn-secondary"> <i class="fab fa-android mr-2"></i>  Рецепты</a>
                             </div>
                         </div>
                         <div class="col-md-6 carousel-img-wrapper">

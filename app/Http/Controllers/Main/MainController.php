@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Main\Comment\StoreRequest;
 use App\Models\Comment;
+use App\Models\Plant;
 use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -44,6 +45,17 @@ class MainController extends Controller
             ->take(3);
 
         return view('main.post', compact('post', 'date', 'relatedPosts'));
+    }
+
+    public function plants()
+    {
+        $plants = Plant::paginate(6);
+        $plantsRandom = Plant::get();
+        if ($plantsRandom->count() >= 4) {
+            $plantsRandom = Plant::get()->random(4);
+        }
+        /*$likedplants = Post::withCount('likedUsers')->orderBy('liked_users_count', 'DESC')->get()->take(4);*/
+        return view('main.plants.index', compact('plants', 'plantsRandom'));
     }
 
     public function comment(Post $post, StoreRequest $request)
