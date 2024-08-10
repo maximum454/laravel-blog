@@ -14,11 +14,6 @@ class PlantService
     {
         try {
             Db::beginTransaction();
-            if (isset($data['tag_ids'])) {
-                $tagsIds = $data['tag_ids'];
-                unset($data['tag_ids']);
-            }
-
             if($data['preview_image']){
                 $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
             }
@@ -47,13 +42,9 @@ class PlantService
             }
 
             $content = $dom->saveHTML();
-
             $data['content'] = $content;
 
             $plant = Plant::firstOrCreate($data);
-            if (isset($tagsIds)) {
-                $plant->tags()->sync($tagsIds);
-            }
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
@@ -65,10 +56,6 @@ class PlantService
     {
         try {
             Db::beginTransaction();
-            if (isset($data['tag_ids'])) {
-                $tagsIds = $data['tag_ids'];
-                unset($data['tag_ids']);
-            }
             if (isset($data['preview_image'])) {
                 $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
             }
@@ -97,13 +84,9 @@ class PlantService
             }
 
             $content = $dom->saveHTML();
-
             $data['content'] = $content;
 
             $plant->update($data);
-            if (isset($tagsIds)) {
-                $plant->tags()->sync($tagsIds);
-            }
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();

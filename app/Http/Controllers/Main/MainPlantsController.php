@@ -26,12 +26,6 @@ class MainPlantsController extends Controller
     {
         $plant = Plant::find($plant);
         $date = Carbon::parse($plant->created_at);
-
-        $relatedPlants = Plant::where('plant_category_id', $plant->plant_category_id)
-            ->where('id', '!=', $plant->id)
-            ->get()
-            ->take(3);
-
-        return view('main.plants.detail', compact('plant', 'date', 'relatedPlants'));
+        return view('main.plants.detail', compact('plant', 'date'));
     }
 }

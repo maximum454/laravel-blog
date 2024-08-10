@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Plant;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class PlantUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,14 +27,6 @@ class StoreRequest extends FormRequest
             'content' => 'required|string',
             'preview_image' => 'required|file',
             'detail_image' => 'required|file',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'title.required' => 'Это поле необходимо для заполнения',
-            'title.string' => 'Строчный тип',
         ];
     }
 }

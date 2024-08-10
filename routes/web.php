@@ -53,25 +53,6 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified'])->gr
         Route::delete('/{plant}', [PlantController::class, 'delete'])->name('plant.delete');
     });
 
-    Route::group(['prefix' => 'plants-categories'], function () {
-        Route::get('/', [PlantCategoryController::class, 'index'])->name('plant.category.index');
-        Route::get('/create', [PlantCategoryController::class, 'create'])->name('plant.category.create');
-        Route::post('/', [PlantCategoryController::class, 'store'])->name('plant.category.store');
-        Route::get('/{category}', [PlantCategoryController::class, 'show'])->name('plant.category.show');
-        Route::get('/{category}/edit', [PlantCategoryController::class, 'edit'])->name('plant.category.edit');
-        Route::patch('/{category}', [PlantCategoryController::class, 'update'])->name('plant.category.update');
-        Route::delete('/{category}', [PlantCategoryController::class, 'delete'])->name('plant.category.delete');
-    });
-    Route::group(['prefix' => 'plant-tags'], function () {
-        Route::get('/', [PlantTagController::class, 'index'])->name('plant.tag.index');
-        Route::get('/create', [PlantTagController::class, 'create'])->name('plant.tag.create');
-        Route::post('/', [PlantTagController::class, 'store'])->name('plant.tag.store');
-        Route::get('/{tag}', [PlantTagController::class, 'show'])->name('plant.tag.show');
-        Route::get('/{tag}/edit', [PlantTagController::class, 'edit'])->name('plant.tag.edit');
-        Route::patch('/{tag}', [PlantTagController::class, 'update'])->name('plant.tag.update');
-        Route::delete('/{tag}', [PlantTagController::class, 'delete'])->name('plant.tag.delete');
-    });
-
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index'])->name('post.index');
         Route::get('/create', [PostController::class, 'create'])->name('post.create');
@@ -135,6 +116,12 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'verified'])->gr
     });
 });
 
-
+Route::get('/clear', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    Artisan::call('route:cache');
+    return "Кэш очищен.";});
 Auth::routes(['verify' => true]);
 

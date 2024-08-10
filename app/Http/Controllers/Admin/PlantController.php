@@ -3,15 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Plant\StoreRequest;
-use App\Http\Requests\Admin\Plant\UpdateRequest;
+use App\Http\Requests\Admin\PlantStoreRequest;
+use App\Http\Requests\Admin\PlantUpdateRequest;
 use App\Models\Plant;
-use App\Models\PlantCategory;
-use App\Models\PlantTag;
-use App\Service\plantservice;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use mysql_xdevapi\Exception;
+use App\Service\PlantService;
+use Illuminate\Support\Str;
 
 class PlantController extends Controller
 {
@@ -34,7 +30,7 @@ class PlantController extends Controller
         return view('admin.plants.create');
     }
 
-    public function store(StoreRequest $request)
+    public function store(PlantStoreRequest $request)
     {
         $data = $request->validated();
         $this->service->store($data);
@@ -43,6 +39,7 @@ class PlantController extends Controller
 
     public function show(Plant $plant)
     {
+        $plant->content = Str::limit(strip_tags($plant->content),200);
         return view('admin.plants.show', compact('plant'));
     }
 
@@ -51,7 +48,7 @@ class PlantController extends Controller
         return view('admin.plants.edit', compact('plant'));
     }
 
-    public function update(UpdateRequest $request, Plant $plant)
+    public function update(PlantUpdateRequest $request, Plant $plant)
     {
         $data = $request->validated();
         $plant = $this->service->update($data, $plant);

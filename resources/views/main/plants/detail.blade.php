@@ -23,23 +23,7 @@
             @endif
             <div class="row">
                 <div class="col-lg-9 mx-auto">
-                    @if($relatedPlants->count())
-                        <section class="related-posts">
-                            <h2 class="section-title mb-4" data-aos="fade-up">Схожие посты</h2>
-                            <div class="row">
-                                @foreach($relatedPlants as $item)
-                                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                                        <img src="{{asset('storage/'.$item->preview_image)}}" alt="related post"
-                                             class="post-thumbnail">
-                                        <p class="post-category">{{$item->category->title}}</p>
-                                        <a href="{{route('plants.detail', $item->id)}}" class="blog-post-permalink">
-                                            <h5 class="post-title">{{$item->title}}</h5>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </section>
-                    @endif
+
                 </div>
             </div>
         </div>

@@ -40,7 +40,7 @@
                                     </tr>
                                     <tr>
                                         <th>Контент</th>
-                                        <td>{{Illuminate\Support\Str::limit(strip_tags($plant->content),200)}}</td>
+                                        <td>{{$plant->content}}</td>
                                     </tr>
                                     <tr>
                                         <th>Превью</th>

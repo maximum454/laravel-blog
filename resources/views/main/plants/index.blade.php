@@ -13,7 +13,6 @@
                                     <img src="{{'storage/'.$item->preview_image}}" alt="{{$item->title}}">
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <p class="blog-post-category">{{$item->category->title}}</p>
                                     <form action="{{route('post.like', $item->id)}}" method="POST">
                                         @csrf
                                         @if($item->liked_users_count)
@@ -51,7 +50,6 @@
                                         <img src="{{'storage/'.$item->preview_image}}" alt="{{$item->title}}">
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <p class="blog-post-category">{{$item->category->title}}</p>
                                         <form action="{{route('post.like', $item->id)}}" method="POST">
                                             @csrf
                                             <span>
