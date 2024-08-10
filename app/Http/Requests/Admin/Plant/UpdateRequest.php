@@ -27,9 +27,6 @@ class UpdateRequest extends FormRequest
             'content' => 'required|string',
             'preview_image' => 'required|file',
             'detail_image' => 'required|file',
-            'plant_category_id' => 'required|integer|exists:plant_categories,id',
-            'tag_ids' => 'nullable|array',
-            'tag_ids.*' => 'nullable|integer|exists:plant_tags,id',
         ];
     }
 }

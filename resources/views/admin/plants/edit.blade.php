@@ -40,33 +40,6 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Выберите категорию</label>
-                            <select name="plant_category_id" class="form-control">
-                                @foreach($categories as $item)
-                                    <option value="{{$item->id}}"
-                                        {{$item->id == $plant->plant_category_id ? 'selected': ''}}
-                                    >{{$item->title}}</option>
-                                @endforeach
-                            </select>
-                            @error('plant_category_id')
-                            <div class="text-danger">Обязательное поле</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Выберите тег</label>
-                            <select name="tag_ids[]" class="select2" multiple="multiple" data-placeholder="Выберите тег"
-                                    data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                @foreach($tags as $item)
-                                    <option value="{{$item->id}}"
-                                        {{is_array($plant->tags->pluck('id')->toArray()) && in_array($item->id, $plant->tags->pluck('id')->toArray()) ? 'selected': ''}}
-                                    >{{$item->title}}</option>
-                                @endforeach
-                            </select>
-                            @error('tag_id')
-                            <div class="text-danger">Обязательное поле</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
                             <label for="name">Описание поста</label>
                             <textarea id="summernote" class="form-control" name="content">
                                     {{$plant->content}}

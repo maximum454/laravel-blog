@@ -31,9 +31,7 @@ class PlantController extends Controller
 
     public function create()
     {
-        $categories = PlantCategory::all();
-        $tags = PlantTag::all();
-        return view('admin.plants.create', compact('categories', 'tags'));
+        return view('admin.plants.create');
     }
 
     public function store(StoreRequest $request)
@@ -50,16 +48,13 @@ class PlantController extends Controller
 
     public function edit(Plant $plant)
     {
-        $categories = PlantCategory::all();
-        $tags = PlantTag::all();
-        return view('admin.plants.edit', compact('plant', 'categories', 'tags'));
+        return view('admin.plants.edit', compact('plant'));
     }
 
     public function update(UpdateRequest $request, Plant $plant)
     {
         $data = $request->validated();
         $plant = $this->service->update($data, $plant);
-        dd(1);
         return view('admin.plants.show', compact('plant'));
     }
 

@@ -50,18 +50,6 @@
                                         <th>Главная</th>
                                         <td><img src="{{asset('storage/'.$plant->detail_image)}}" width="120"  alt=""></td>
                                     </tr>
-                                    <tr>
-                                        <th>Категория</th>
-                                        <td>{{$plant->category->title}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Теги</th>
-                                        <td>
-                                            @foreach($plant->tags as $tag)
-                                            {{$tag->title}}
-                                            @endforeach
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>

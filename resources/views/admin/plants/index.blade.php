@@ -30,14 +30,6 @@
                                 <i class="fas fa-plus"></i>
                                 Добавить
                             </a>
-                            <a href="{{route('plant.category.index')}}" class="btn btn-primary">
-                                <i class="fas fa-th-list"></i>
-                                Категория
-                            </a>
-                            <a href="{{route('plant.tag.index')}}" class="btn btn-primary">
-                                <i class="fas fa-tags"></i>
-                                Теги
-                            </a>
                         </div>
 
                         <form action="enhanced-results.html">
