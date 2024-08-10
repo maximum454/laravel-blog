@@ -23,10 +23,11 @@ class PlantUpdateRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'title_second' => 'nullable|string',
+            'title_second' => 'sometimes|string',
             'content' => 'required|string',
-            'preview_image' => 'required|file',
-            'detail_image' => 'required|file',
+            'medicinal' => 'nullable|string',
+            'preview_image' => 'nullable|file',
+            'detail_image' => 'nullable|file',
         ];
     }
 }

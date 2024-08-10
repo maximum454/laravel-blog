@@ -17,7 +17,7 @@
         <section class="content">
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
-                <form class="row" action="{{route('plant.update', $plant->id)}}" method="plant"
+                <form class="row" action="{{route('plant.update', $plant->id)}}" method="POST"
                       enctype="multipart/form-data">
                     @csrf
                     @method('patch')
@@ -26,23 +26,32 @@
                         <div class="form-group">
                             <label for="name">Название растения</label>
                             <input type="text" class="form-control" id="name" name="title" placeholder="Название"
-                                   value="{{$plant->title}}">
+                                   value="{{old('title',$plant->title)}}">
                             @error('title')
                             <div class="text-danger">Обязательное поле</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="name">Второе название растения</label>
-                            <input type="text" class="form-control" id="name" name="title" placeholder="Название второе"
-                                   value="{{$plant->title_second}}">
+                            <input type="text" class="form-control" id="name" name="title_second" placeholder="Название второе"
+                                   value="{{old('title_second',$plant->title_second)}}">
                             @error('title')
                             <div class="text-danger">Обязательное поле</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="name">Описание поста</label>
-                            <textarea id="summernote" class="form-control" name="content">
-                                    {{$plant->content}}
+                            <label for="name">Описание</label>
+                            <textarea class="form-control summernote" name="content">
+                                    {{old('content',$plant->content)}}
+                                </textarea>
+                            @error('content')
+                            <div class="text-danger">Обязательное поле</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Лечебные свойства</label>
+                            <textarea class="form-control summernote" name="medicinal">
+                                    {{old('medicinal',$plant->medicinal)}}
                                 </textarea>
                             @error('content')
                             <div class="text-danger">Обязательное поле</div>
@@ -71,7 +80,7 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" name="preview_image" class="custom-file-input"
-                                                   id="exampleInputFile">
+                                                   id="exampleInputFile" value="{{ asset('storage/'.$plant->preview_image)}}">
                                             <label class="custom-file-label" for="exampleInputFile">Выберите
                                                 изображение</label>
                                         </div>
@@ -100,7 +109,7 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" name="detail_image" class="custom-file-input"
-                                                   id="exampleInputFile">
+                                                   id="exampleInputFile" value="{{ asset('storage/'.$plant->preview_image)}}">
                                             <label class="custom-file-label" for="exampleInputFile">Выберите
                                                 изображение</label>
                                         </div>

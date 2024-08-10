@@ -25,6 +25,7 @@ class PlantStoreRequest extends FormRequest
             'title' => 'required|string',
             'title_second' => 'nullable|string',
             'content' => 'required|string',
+            'medicinal' => 'nullable|string',
             'preview_image' => 'required|file',
             'detail_image' => 'required|file',
         ];

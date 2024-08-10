@@ -98,7 +98,7 @@
 <script>
     $(function () {
         // Summernote
-        $('#summernote').summernote({
+        $('.summernote').summernote({
             height: 400,
         })
 

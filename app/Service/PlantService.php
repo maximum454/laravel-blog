@@ -21,28 +21,9 @@ class PlantService
                 $data['detail_image'] = Storage::disk('public')->put('/images', $data['detail_image']);
             }
 
-            $content = $data['content'];
-            $dom = new \DomDocument();
-            $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-            $imageFile = $dom->getElementsByTagName('img');
-            if($imageFile){
-                foreach ($imageFile as $item => $image) {
 
-                    $data2 = $image->getAttribute('src');
-                    list($type, $data2) = explode(';', $data2);
-                    list(, $data2)      = explode(',', $data2);
-                    $imgeData = base64_decode($data2);
-                    $image_name = "/storage/images/" . time() . $item . '.png';
-                    $path = public_path() . $image_name;
-                    file_put_contents($path, $imgeData);
-
-                    $image->removeAttribute('src');
-                    $image->setAttribute('src', $image_name);
-                }
-            }
-
-            $content = $dom->saveHTML();
-            $data['content'] = $content;
+            $this->content($data);
+            $this->medicinal($data);
 
             $plant = Plant::firstOrCreate($data);
             Db::commit();
@@ -63,12 +44,12 @@ class PlantService
                 $data['detail_image'] = Storage::disk('public')->put('/images', $data['detail_image']);
             }
 
-
             $content = $data['content'];
-            $dom = new \DomDocument();
-            $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-            $imageFile = $dom->getElementsByTagName('img');
+            $dom = new \DomDocument('1.0','UTF-8');
 
+            $dom->loadHtml('<?xml encoding="UTF-8">' . $content, LIBXML_NOERROR);
+
+            $imageFile = $dom->getElementsByTagName('img');
             foreach ($imageFile as $item => $image) {
 
                 $data2 = $image->getAttribute('src');
@@ -82,11 +63,10 @@ class PlantService
                 $image->removeAttribute('src');
                 $image->setAttribute('src', $image_name);
             }
-
-            $content = $dom->saveHTML();
+            $content = html_entity_decode($dom->saveHTML());
             $data['content'] = $content;
-
             $plant->update($data);
+
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
@@ -94,5 +74,57 @@ class PlantService
         }
 
         return $plant;
+    }
+
+    public function content($data)
+    {
+        $content = $data['content'];
+        $dom = new \DomDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $imageFile = $dom->getElementsByTagName('img');
+        if($imageFile){
+            foreach ($imageFile as $item => $image) {
+
+                $data2 = $image->getAttribute('src');
+                list($type, $data2) = explode(';', $data2);
+                list(, $data2)      = explode(',', $data2);
+                $imgeData = base64_decode($data2);
+                $image_name = "/storage/images/" . time() . $item . '.png';
+                $path = public_path() . $image_name;
+                file_put_contents($path, $imgeData);
+
+                $image->removeAttribute('src');
+                $image->setAttribute('src', $image_name);
+            }
+        }
+
+        $content = $dom->saveHTML();
+        $data['content'] = $content;
+    }
+
+    public function medicinal($data)
+    {
+        $medicinal = $data['medicinal'];
+        $dom = new \DomDocument();
+        $dom->loadHtml($medicinal, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $imageFile = $dom->getElementsByTagName('img');
+        if($imageFile){
+            foreach ($imageFile as $item => $image) {
+
+                $data2 = $image->getAttribute('src');
+                list($type, $data2) = explode(';', $data2);
+                list(, $data2)      = explode(',', $data2);
+                $imgeData = base64_decode($data2);
+                $image_name = "/storage/images/" . time() . $item . '.png';
+                $path = public_path() . $image_name;
+                file_put_contents($path, $imgeData);
+
+                $image->removeAttribute('src');
+                $image->setAttribute('src', $image_name);
+            }
+        }
+
+        $medicinal = $dom->saveHTML();
+        $data['medicinal'] = $medicinal;
     }
 }
